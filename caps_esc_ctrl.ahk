@@ -1,23 +1,18 @@
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
-; Remap Caps Lock to Escape when tapped, Control when held
+; ==============================================================================
+; 1. CAPS LOCK: ESCAPE ON TAP / CONTROL ON HOLD
+; ==============================================================================
 *CapsLock::
 {
     KeyWait "CapsLock"
-    
-    ; If caps lock was held down with another key, it acts as Control
-    ; If tapped alone, it acts as Escape
     if (A_PriorKey = "CapsLock")
         Send "{Esc}"
 }
+*CapsLock Up:: return
 
-*CapsLock Up::
-{
-    return
-}
-
-; Make Caps Lock act as Control modifier for combinations
+; Caps Lock + Key = Control + Key
 #HotIf GetKeyState("CapsLock", "P")
 *a::Send "^a"
 *b::Send "^b"
@@ -65,5 +60,41 @@
 *PgDn::Send "^{PgDn}"
 #HotIf
 
-; Optional: Shift+Caps Lock to toggle actual Caps Lock
+; ==============================================================================
+; 2. SPACEBAR: SPACE ON TAP / TURKISH MODIFIER ON HOLD
+; ==============================================================================
+$Space::
+{
+    KeyWait "Space"
+    if (A_PriorKey = "Space")
+        Send "{Space}"
+}
+
+#HotIf GetKeyState("Space", "P")
+; Lowercase mappings
+c::Send "ç"
+g::Send "ğ"
+i::Send "ı"
+o::Send "ö"
+s::Send "ş"
+u::Send "ü"
+
+; Uppercase mappings (Space + Left Shift + Key)
++c::Send "Ç"
++g::Send "Ğ"
++i::Send "İ"
++o::Send "Ö"
++s::Send "Ş"
++u::Send "Ü"
+#HotIf
+
+; ==============================================================================
+; 3. RIGHT SHIFT: REMAP TO BACKSPACE (Turn off sticky keys at Windows accessibility)
+; ==============================================================================
+RShift::Backspace
+
+; ==============================================================================
+; 4. EXTRA UTILITIES
+; ==============================================================================
+; Shift + Caps Lock to toggle actual Caps Lock
 +CapsLock::CapsLock
