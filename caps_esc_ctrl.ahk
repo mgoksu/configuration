@@ -61,35 +61,26 @@
 #HotIf
 
 ; ==============================================================================
-; 2. SPACEBAR: SPACE ON TAP / TURKISH MODIFIER ON HOLD
+; 2. TURKISH CHARACTERS (Right Alt + Key)
 ; ==============================================================================
-$Space::
-{
-    KeyWait "Space"
-    if (A_PriorKey = "Space")
-        Send "{Space}"
-}
+; Lowercase
+>!g::Send "ğ"
+>!u::Send "ü"
+>!s::Send "ş"
+>!i::Send "ı"
+>!o::Send "ö"
+>!c::Send "ç"
 
-#HotIf GetKeyState("Space", "P")
-; Lowercase mappings
-c::Send "ç"
-g::Send "ğ"
-i::Send "ı"
-o::Send "ö"
-s::Send "ş"
-u::Send "ü"
-
-; Uppercase mappings (Space + Left Shift + Key)
-+c::Send "Ç"
-+g::Send "Ğ"
-+i::Send "İ"
-+o::Send "Ö"
-+s::Send "Ş"
-+u::Send "Ü"
-#HotIf
+; Uppercase (Right Alt + Shift + Key)
+>!+g::Send "Ğ"
+>!+u::Send "Ü"
+>!+s::Send "Ş"
+>!+i::Send "İ"
+>!+o::Send "Ö"
+>!+c::Send "Ç"
 
 ; ==============================================================================
-; 3. RIGHT SHIFT: REMAP TO BACKSPACE (Turn off sticky keys at Windows accessibility)
+; 3. RIGHT SHIFT: REMAP TO BACKSPACE
 ; ==============================================================================
 RShift::Backspace
 
